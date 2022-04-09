@@ -1,1 +1,1 @@
-# K8S_benchmark_extractor
+# An offline K8S benchmark extractor
