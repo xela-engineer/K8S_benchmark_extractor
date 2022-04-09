@@ -1,4 +1,4 @@
-package k8sExtractor
+package yamlextractor
 
 func NewService() {
 

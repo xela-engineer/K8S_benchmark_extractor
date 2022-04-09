@@ -1,4 +1,4 @@
-package k8sExtractor
+package kubehunter
 
 func NewService() {
 

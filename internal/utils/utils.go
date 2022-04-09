@@ -1,4 +1,4 @@
-package k8sExtractor
+package utils
 
 func NewService() {
 
