@@ -10,6 +10,6 @@ spec:
         - name: kube-hunter
           image: aquasec/kube-hunter
           command: ["kube-hunter"]
-          args: ["--pod", "--report=json"]
+          args: ["--pod", "--quick","--report=json"]
       restartPolicy: Never
   backoffLimit: 4
