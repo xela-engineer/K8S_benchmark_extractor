@@ -1,13 +1,15 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/kelseyhightower/envconfig"
 )
 
 type environmentVariables struct {
-	Port             int
-	MongoURI         string `required:"true"`
-	DatabaseName     string `required:"true"`
+	Path string
+
 	DatabaseUsername string `envconfig:"DATABASE_USERNAME"`
 	DatabasePassword string `envconfig:"DATABASE_PASSWORD"`
 	JWTRealm         string `required:"true"`
@@ -15,7 +17,11 @@ type environmentVariables struct {
 }
 
 func main() {
-	var env = environmentVariables{Port: 3001}
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	var env = environmentVariables{Path: path}
 	if err := envconfig.Process("APP", &env); err != nil { // Extract env. variables fomr ./.env
 		panic(err)
 	}
