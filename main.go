@@ -8,23 +8,30 @@ import (
 )
 
 type environmentVariables struct {
-	Path string
-
-	DatabaseUsername string `envconfig:"DATABASE_USERNAME"`
-	DatabasePassword string `envconfig:"DATABASE_PASSWORD"`
-	JWTRealm         string `required:"true"`
-	JWTSecretKey     string `required:"true"`
+	Path string `envconfig:"K8SRESULT_PATH"`
 }
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
 func main() {
 	path, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
 	}
+
 	var env = environmentVariables{Path: path}
 	if err := envconfig.Process("APP", &env); err != nil { // Extract env. variables fomr ./.env
 		panic(err)
 	}
+	if env.Path == "" {
+		env.Path = path
+	}
+
+	err = os.Mkdir(env.Path+"/fetcher_result/", 0755)
+	check(err)
 
 	/*db, err := database.NewDatabase(env.MongoURI, env.DatabaseName, env.DatabaseUsername, env.DatabasePassword)
 	if err != nil {
