@@ -1,4 +1,16 @@
 # An offline K8S benchmark extractor
+This is an offline K8S manifest extractor for HKUST FYP project: Security Compliance Checker tools for Cloud Environment v4
+
+## Quick start
+```bash 
+git clone https://github.com/alexshinningsun/K8S_benchmark_extractor.git
+export APP_K8SRESULT_PATH=/tmp/K8S_benchmark_extractor
+export APP_K8S_CLOUD_PLATFORM=AWS
+cd <repo-directory>
+go build -o app .
+./app
+```
+Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to 
 
 ## Program Logic :
 1. User set the \<output path\>
@@ -38,13 +50,3 @@
 1. tar cf \<output path\>/fetcher_result.tar \<output path\>/fetcher_result/
 * User need to import the archive file to backend through website.
 
-## Quick start
-```
-export APP_K8SRESULT_PATH=/tmp/K8S_benchmark_extractor
-export APP_K8S_CLOUD_PLATFORM=AWS
-cd <repo-directory>
-go build -o app .
-./app
-```
-Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to 
-## Please Note
