@@ -42,6 +42,9 @@
 ```
 export APP_K8SRESULT_PATH=/tmp/K8S_benchmark_extractor
 export APP_K8S_CLOUD_PLATFORM=AWS
+cd <repo-directory>
+go build -o app .
+./app
 ```
-
+Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to 
 ## Please Note

@@ -1,9 +1,13 @@
 package main
 
 import (
+	"bytes"
+	"fmt"
+	"io"
 	"log"
 	"os"
 
+	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/archiveFiles"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/k8sExtractor"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubebench"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubehunter"
@@ -23,6 +27,7 @@ func check(e error) {
 	}
 }
 func main() {
+
 	var errPtrHunter *error
 	var errPtrKubeBench *error
 	var errPtrExtractor *error
@@ -76,9 +81,16 @@ func main() {
 		Wg:       nil,
 	}
 	sK8sbench.Execkubebench()
-	/*db, err := database.NewDatabase(env.MongoURI, env.DatabaseName, env.DatabaseUsername, env.DatabasePassword)
+
+	var buf bytes.Buffer //Part D
+	err3 := archiveFiles.Tar(env.Path+"/fetcher_result", &buf)
+	// write the .tar.gzip
+	fileToWrite, err := os.OpenFile(env.Path+"/fetcher_result.tar", os.O_CREATE|os.O_RDWR, os.FileMode(755))
 	if err != nil {
 		panic(err)
-	}*/
-
+	}
+	if _, err := io.Copy(fileToWrite, &buf); err != nil {
+		panic(err)
+	}
+	fmt.Printf("[ExtractK8sObjects] Error in extracting K8S manifests: %v\n", err3)
 }
