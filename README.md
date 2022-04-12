@@ -28,10 +28,10 @@
 1. Remove kubebench by $kubectl
 
 
-### C. Get and save all the yaml from k8s cluster :
+### C. Get and save all the K8S Manifest from k8s cluster(k8sExtractor.go) :
 1. Run a bash script to get all yaml from k8s cluster!
 1. Save to output path
-* Backend will receive all the yamls. Run Kube-linter and Kube-score to analysis those yamls.
+* Backend will receive all the Manifests. Run Kube-linter and Kube-score to analysis those yamls.
 
 
 ### D. The output of the program is an archive file :

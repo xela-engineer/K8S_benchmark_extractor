@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/k8sExtractor"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubebench"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubehunter"
 	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/utils"
@@ -24,6 +25,7 @@ func check(e error) {
 func main() {
 	var errPtrHunter *error
 	var errPtrKubeBench *error
+	var errPtrExtractor *error
 	errK8S := utils.TestKubectl() // Test kubectl command
 	if !errK8S {
 		panic(errK8S)
@@ -48,8 +50,17 @@ func main() {
 	//wg = new(sync.WaitGroup)
 	errPtrHunter = new(error)
 	errPtrKubeBench = new(error)
+	errPtrExtractor = new(error)
 
-	sK8sHunter := &kubehunter.Service{
+	sK8sManifestExtractor := &k8sExtractor.Service{ // Part C
+		Path:    env.Path,
+		App_dir: env.App_dir,
+		Err:     errPtrExtractor,
+		Wg:      nil,
+	}
+	sK8sManifestExtractor.ExtractK8sObjects()
+
+	sK8sHunter := &kubehunter.Service{ // Part A
 		Path:    env.Path,
 		App_dir: env.App_dir,
 		Err:     errPtrHunter,
@@ -57,7 +68,7 @@ func main() {
 	}
 	sK8sHunter.Execkubehunter()
 
-	sK8sbench := &kubebench.Service{
+	sK8sbench := &kubebench.Service{ // Part B
 		Path:     env.Path,
 		App_dir:  env.App_dir,
 		Platform: env.Platform,
