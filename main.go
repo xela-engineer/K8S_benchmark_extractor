@@ -4,11 +4,16 @@ import (
 	"log"
 	"os"
 
+	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubebench"
+	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/kubehunter"
+	"github.com/alexshinningsun/K8S_benchmark_extractor/internal/utils"
 	"github.com/kelseyhightower/envconfig"
 )
 
 type environmentVariables struct {
-	Path string `envconfig:"K8SRESULT_PATH"`
+	Path     string `envconfig:"K8SRESULT_PATH"`
+	App_dir  string
+	Platform string `envconfig:"K8S_CLOUD_PLATFORM"`
 }
 
 func check(e error) {
@@ -17,22 +22,49 @@ func check(e error) {
 	}
 }
 func main() {
-	path, err := os.Getwd()
+	var errPtrHunter *error
+	var errPtrKubeBench *error
+	errK8S := utils.TestKubectl() // Test kubectl command
+	if !errK8S {
+		panic(errK8S)
+	}
+
+	path, err := os.Getwd() // Get the current working directory
 	if err != nil {
 		log.Println(err)
 	}
 
-	var env = environmentVariables{Path: path}
-	if err := envconfig.Process("APP", &env); err != nil { // Extract env. variables fomr ./.env
+	var env = environmentVariables{Path: path, App_dir: path} // Get environment variable
+	if err := envconfig.Process("APP", &env); err != nil {    // Extract env. variables fomr ./.env
 		panic(err)
 	}
 	if env.Path == "" {
 		env.Path = path
 	}
-
-	err = os.Mkdir(env.Path+"/fetcher_result/", 0755)
+	if _, err := os.Stat(env.Path + "/fetcher_result/"); os.IsNotExist(err) {
+		err = os.Mkdir(env.Path+"/fetcher_result/", 0755) // Create a directory for storing resutl
+	}
 	check(err)
+	//wg = new(sync.WaitGroup)
+	errPtrHunter = new(error)
+	errPtrKubeBench = new(error)
 
+	sK8sHunter := &kubehunter.Service{
+		Path:    env.Path,
+		App_dir: env.App_dir,
+		Err:     errPtrHunter,
+		Wg:      nil,
+	}
+	sK8sHunter.Execkubehunter()
+
+	sK8sbench := &kubebench.Service{
+		Path:     env.Path,
+		App_dir:  env.App_dir,
+		Platform: env.Platform,
+		Err:      errPtrKubeBench,
+		Wg:       nil,
+	}
+	sK8sbench.Execkubebench()
 	/*db, err := database.NewDatabase(env.MongoURI, env.DatabaseName, env.DatabaseUsername, env.DatabasePassword)
 	if err != nil {
 		panic(err)
