@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Go",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+			//"envFile": "${workspaceFolder}/.env",
+			"env": {
+				"APP_K8SRESULT_PATH": "/tmp/K8S_benchmark_extractor",
+                "APP_K8S_CLOUD_PLATFORM": "AWS",
+			},
+            "args": []
+        }
+    ]
+}
