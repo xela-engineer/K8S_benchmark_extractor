@@ -7,6 +7,7 @@ git clone https://github.com/alexshinningsun/K8S_benchmark_extractor.git
 export APP_K8SRESULT_PATH=/tmp/K8S_benchmark_extractor
 export APP_K8S_CLOUD_PLATFORM=AWS
 cd <repo-directory>
+go mod download
 go build -o app .
 ./app
 ```
