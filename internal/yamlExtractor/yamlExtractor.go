@@ -1,5 +1,0 @@
-package yamlextractor
-
-func NewService() {
-
-}
