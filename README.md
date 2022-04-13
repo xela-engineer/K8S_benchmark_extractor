@@ -1,6 +1,10 @@
 # An offline K8S benchmark extractor
 This is an offline K8S manifest extractor for HKUST FYP project: Security Compliance Checker tools for Cloud Environment v4
 
+## Prerequisites
+- Please ready your $Kubectl command
+- golang 1.17 version
+- 
 ## Quick Start
 ```bash 
 git clone https://github.com/alexshinningsun/K8S_benchmark_extractor.git
