@@ -11,7 +11,7 @@ go mod download
 go build -o app .
 ./app
 ```
-Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to 
+Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to Security Compliance Checker tools for Cloud Environment v4 frontend
 
 ## Please Noted
   * Keep the tar file name as fetcher_result.tar
