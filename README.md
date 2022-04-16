@@ -4,6 +4,7 @@ This is an offline K8S manifest extractor for HKUST FYP project: Security Compli
 ## Prerequisites
 - Please ready your $Kubectl command
 - golang 1.17 version
+- Development env.: Linux Redhat / Centos7
 
 ## Quick Start
 ```bash 
