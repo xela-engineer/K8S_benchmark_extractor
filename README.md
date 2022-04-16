@@ -19,8 +19,8 @@ go build -o app .
 Please Upload the /tmp/K8S_benchmark_extractor/fetcher_result.tar to Security Compliance Checker tools for Cloud Environment v4 frontend
 
 ## Please Note
-  * Keep the tar file name as fetcher_result.tar
-  * Do not change the naming inside the fetcher_result.tar
+  * 🚩 **Keep** the tar **file name** as fetcher_result.tar
+  * 🚩 **Do not change** the naming inside the fetcher_result.tar
 ## Program Logic :
 1. User set the \<output path\>
     - `export APP_K8SRESULT_PATH= ` E.G. `export APP_K8SRESULT_PATH=/tmp/K8S_benchmark_extractor`
