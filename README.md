@@ -3,8 +3,19 @@ This is an offline K8S manifest extractor for HKUST FYP project: Security Compli
 
 ## Prerequisites
 - Please ready your $Kubectl command
-- golang 1.17 version
-- Development env.: Linux Redhat / Centos7
+  - Please check if your Kubectl command should be connected to a k8s cluster. (E.G. we should get the k8s’ list of nodes by $kubectl get nodes)
+- Install golang 1.17 version in your environment (we should get version name by $go version)
+```bash
+# Install Golang binary
+wget https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
+tar -zxvf go1.17.5.linux-amd64.tar.gz -C /usr/local/
+echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
+mkdir /go
+echo "export GOPATH=/go" >> ~/.bash_profile
+source ~/.bash_profile
+rm -f go1.17.5.linux-amd64.tar.gz
+```
+- Development environment: Linux Redhat / Centos7
 
 ## Quick Start
 ```bash 
